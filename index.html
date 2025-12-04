@@ -24,7 +24,8 @@ img {vertical-align: middle;}
   width: auto;
   padding: 16px;
   margin-top: -22px;
-  color: white;
+  color: gray;
+  background-color: rgba(0,0,1,0.8)
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
@@ -92,7 +93,7 @@ img {vertical-align: middle;}
 
 /* On smaller screens, decrease text size */
 @media only screen and (max-width: 300px) {
-  .prev, .next,.text {font-size: 11px}
+  .prev, .next,.text {font-size: 18px}
 }
 </style>
 </head>
@@ -103,38 +104,76 @@ img {vertical-align: middle;}
 <p/>
 <div class="slideshow-container">
 
+
+
 <div class="mySlides fade">
-  <div class="numbertext">1 / 6</div>
+  <div class="numbertext"></div>
   <img src="img/anchor.jpg" style="width:100%">
+  <div class="text">An anchored stance</div>
+</div>
+<div class="mySlides fade">
+  <div class="numbertext"></div>
+  <img src="img/1.jpg" style="width:100%">
   <div class="text">An anchored stance</div>
 </div>
 
 <div class="mySlides fade">
-  <div class="numbertext">2 / 6</div>
+  <div class="numbertext"></div>
   <img src="img/2.jpg" style="width:100%">
   <div class="text"></div>
 </div>
 
 <div class="mySlides fade">
-  <div class="numbertext">3 / 6</div>
+  <div class="numbertext"></div>
   <img src="img/3.jpg" style="width:100%">
   <div class="text"></div>
 </div>
 <div class="mySlides fade">
-  <div class="numbertext">4 / 6</div>
-  <img src="img/4.jpg" style="width:100%">
+  <div class="numbertext"></div>
+  <img src="img/4.jpg" style="height:80%">
   <div class="text"></div>
 </div>
 <div class="mySlides fade">
-  <div class="numbertext">5 / 6</div>
+  <div class="numbertext"></div>
   <img src="img/5.jpg" style="width:100%">
   <div class="text"></div>
 </div>
 <div class="mySlides fade">
-  <div class="numbertext">6 / 6</div>
+  <div class="numbertext"></div>
   <img src="img/6.jpg" style="width:100%">
   <div class="text"></div>
 </div>
+<div class="mySlides fade">
+  <div class="numbertext"></div>
+  <img src="img/7.jpg" style="width:100%">
+  <div class="text"></div>
+</div>
+<div class="mySlides fade">
+  <div class="numbertext"></div>
+  <img src="img/8.jpg" style="width:100%">
+  <div class="text"></div>
+</div>
+<div class="mySlides fade">
+  <div class="numbertext"></div>
+  <img src="img/9.jpg" style="width:100%">
+  <div class="text"></div>
+</div>
+<div class="mySlides fade">
+  <div class="numbertext"></div>
+  <img src="img/10.jpg" style="width:100%">
+  <div class="text"></div>
+</div>
+<div class="mySlides fade">
+  <div class="numbertext"></div>
+  <img src="img/11.jpg" style="width:100%">
+  <div class="text"></div>
+</div>
+<div class="mySlides fade">
+  <div class="numbertext"></div>
+  <img src="img/12.jpg" style="width:100%">
+  <div class="text"></div>
+</div>
+
 
 <a class="prev" onclick="plusSlides(-1)">❮</a>
 <a class="next" onclick="plusSlides(1)">❯</a>
@@ -149,21 +188,34 @@ img {vertical-align: middle;}
   <span class="dot" onclick="currentSlide(4)"></span> 
   <span class="dot" onclick="currentSlide(5)"></span> 
   <span class="dot" onclick="currentSlide(6)"></span> 
+  <span class="dot" onclick="currentSlide(7)"></span> 
+  <span class="dot" onclick="currentSlide(8)"></span> 
+  <span class="dot" onclick="currentSlide(9)"></span> 
+  <span class="dot" onclick="currentSlide(10)"></span>
+  <span class="dot" onclick="currentSlide(11)"></span> 
+  <span class="dot" onclick="currentSlide(12)"></span> 
+  <span class="dot" onclick="currentSlide(13)"></span> 
 </div>
 
+
 <script>
-let slideIndex = 1;
-showSlides(slideIndex);
+
+
+let slideIndex = 0;
+let block = 0;
+showSlidesN(slideIndex);
 
 function plusSlides(n) {
-  showSlides(slideIndex += n);
+  block = 1;
+  showSlidesN(slideIndex += n);
 }
 
 function currentSlide(n) {
-  showSlides(slideIndex = n);
+  block = 1;
+  showSlidesN(slideIndex = n);
 }
 
-function showSlides(n) {
+function showSlidesN(n) {
   let i;
   let slides = document.getElementsByClassName("mySlides");
   let dots = document.getElementsByClassName("dot");
@@ -177,6 +229,29 @@ function showSlides(n) {
   }
   slides[slideIndex-1].style.display = "block";  
   dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+
+}
+
+
+
+function showSlides() {
+  if(block > 0) { return ; }
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+  
 }
 </script>
 </body>
@@ -184,7 +259,7 @@ function showSlides(n) {
 <footer>
 <hr />
 <p>
-<h2>44 HAVELOCK ROAD RTM COMPANY LIMITED</h2>
+<b>44 HAVELOCK ROAD RTM COMPANY LIMITED</b>
 <br>Registered in England and Wales, registration number 16449900, Registered office 349 Royal College Street, London, England, NW1 9QS<br/>
 
 </p>
