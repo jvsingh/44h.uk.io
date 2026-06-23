@@ -611,10 +611,12 @@
         into the div with id "airbnbEmbedSlot" instead and delete the template.
       -->
       <template id="airbnbEmbedTemplate">
-        <div class="airbnb-embed-frame" data-id="1670203654719248835" data-view="home" data-hide-price="true" style="width: 450px; height: 300px; margin: auto;"><a href="https://www.airbnb.co.uk/rooms/1670203654719248835?guests=1&amp;adults=1&amp;s=66&amp;source=embed_widget">View on Airbnb</a><a href="https://www.airbnb.co.uk/rooms/1670203654719248835?guests=1&amp;adults=1&amp;s=66&amp;source=embed_widget" rel="nofollow">Rental unit in East Sussex · ★New · Studio · 1 bed · 1 private bathroom</a><script async="" src="https://www.airbnb.co.uk/embeddable/airbnb_jssdk"></script></div>
-      </template>
+        <div class="airbnb-embed-frame" data-id="1247055386882046345" data-view="home" data-hide-price="true" style="width: 450px; height: 300px; margin: auto;"><a href="https://www.airbnb.co.uk/rooms/1247055386882046345?guests=1&amp;adults=1&amp;s=66&amp;source=embed_widget">View on Airbnb</a><a href="https://www.airbnb.co.uk/rooms/1247055386882046345?guests=1&amp;adults=1&amp;s=66&amp;source=embed_widget" rel="nofollow">Studio Apartment in Hastings - close to beach · ★4.89 · 1 bedroom · 1 bed · 1 private bathroom</a><script async="" src="https://www.airbnb.co.uk/embeddable/airbnb_jssdk"></script></div>
 
-      <!--div id="airbnbEmbedSlot">
+<div class="airbnb-embed-frame" data-id="1670193125984919616" data-view="home" data-hide-price="true" style="width: 450px; height: 300px; margin: auto;"><a href="https://www.airbnb.co.uk/rooms/1670193125984919616?guests=1&amp;adults=1&amp;s=66&amp;source=embed_widget">View on Airbnb</a><a href="https://www.airbnb.co.uk/rooms/1670193125984919616?guests=1&amp;adults=1&amp;s=66&amp;source=embed_widget" rel="nofollow">Rental unit in East Sussex · ★New · Studio · 1 bed · 1 private bathroom</a><script async="" src="https://www.airbnb.co.uk/embeddable/airbnb_jssdk"></script></div>
+      
+</template>
+      <div id="airbnbEmbedSlot">
         <div class="airbnb-embed-placeholder" id="airbnbPlaceholder">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
             <rect x="6" y="16" width="28" height="18" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
@@ -625,7 +627,8 @@
           <p class="ph-hint" id="airbnbPhHint">This space is ready for the listing's embed code from Airbnb.</p>
           <button class="btn btn-ghost" id="loadAirbnbBtn" type="button" hidden>Load listing anyway</button>
         </div>
-      </div -->
+      </div>
+	
     </div>
   </div>
 </section>
@@ -821,7 +824,7 @@
   var loadAnywayBtn = document.getElementById('loadAirbnbBtn');
 
   function hasRealEmbed(){
-    return !!(embedTemplate && embedTemplate.content && embedTemplate.content.querySelector('iframe'));
+    return !!(embedTemplate && embedTemplate.content && embedTemplate.content.children.length > 0);
   }
   function showAirbnbEmbed(){
     if(!hasRealEmbed()) return;
