@@ -1,269 +1,879 @@
-<html>
-<body>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hastings.44H.uk — Hastings</title>
+<meta name="description" content="The Hastings.44H.uk initiative — a small hobby project showcasing Hastings and its surroundings. The castle, the hill, and the sea.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%2315171A'/%3E%3Cpath d='M12 4v3M9 6h6M12 7v9M7 12a5 5 0 0010 0M5 12h2M17 12h2' stroke='%23B5562E' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-* {box-sizing: border-box}
-body {font-family: Verdana, sans-serif; margin:0}
-.mySlides {display: none}
-img {vertical-align: middle;}
+  :root{
+    --tar:#15171A;
+    --tar-soft:#201C19;
+    --chalk:#F1ECE2;
+    --paper:#F8F5EE;
+    --ink:#1C1A17;
+    --rust:#B5562E;
+    --seaglass:#5C8A82;
+    --brass:#A98B53;
+    --line-on-dark: rgba(241,236,226,0.14);
+    --line-on-light: rgba(28,26,23,0.14);
+    --font-display:'Fraunces', serif;
+    --font-body:'Work Sans', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
 
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
-}
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--tar);
+    color:var(--paper);
+    font-family:var(--font-body);
+    font-weight:400;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit;}
+  ::selection{background:var(--rust); color:var(--paper);}
 
-/* Next & previous buttons */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: gray;
-  background-color: rgba(0,0,1,0.8)
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
+  :focus-visible{
+    outline:2px solid var(--seaglass);
+    outline-offset:3px;
+  }
 
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 28px;
+  }
 
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:50;
+    padding:22px 0;
+    background:linear-gradient(to bottom, rgba(21,23,26,0.65), transparent);
+    transition:background .35s ease, padding .35s ease, box-shadow .35s ease;
+  }
+  .nav.is-scrolled{
+    background:rgba(21,23,26,0.92);
+    backdrop-filter:blur(8px);
+    padding:14px 0;
+    box-shadow:0 1px 0 var(--line-on-dark);
+  }
+  .nav .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .nav-mark{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.3rem;
+    letter-spacing:0.02em;
+    color:var(--paper);
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .nav-mark img{
+    width:clamp(140px, 20vw, 160px);
+    height:auto;
+    display:block;
+  }
+  .nav-mark span{
+    font-family:var(--font-mono);
+    font-size:0.62rem;
+    color:var(--brass);
+    letter-spacing:0.12em;
+    font-weight:400;
+  }
+  .nav-links{
+    display:flex;
+    gap:32px;
+    list-style:none;
+    margin:0; padding:0;
+  }
+  .nav-links a{
+    font-size:0.82rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--chalk);
+    opacity:0.78;
+    transition:opacity .2s ease;
+    border-bottom:1px solid transparent;
+    padding-bottom:4px;
+  }
+  .nav-links a:hover{opacity:1; border-bottom-color:var(--rust);}
 
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:flex-end;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;
+    inset:0;
+    background-image:url('https://44h.uk/img/anchor.jpg');
+    background-size:cover;
+    background-position:center 72%;
+    filter:saturate(0.9) contrast(1.02);
+    transform:scale(1.04);
+    animation:heroIn 1.6s ease-out forwards;
+  }
+  @keyframes heroIn{ from{opacity:0; transform:scale(1.1);} to{opacity:1; transform:scale(1.04);} }
+  .hero-scrim{
+    position:absolute; inset:0;
+    background:
+      linear-gradient(to top, rgba(21,23,26,0.96) 0%, rgba(21,23,26,0.55) 38%, rgba(21,23,26,0.15) 62%, rgba(21,23,26,0.45) 100%);
+  }
+  .hero-content{
+    position:relative;
+    z-index:2;
+    padding:0 28px 88px;
+    max-width:1180px;
+    margin:0 auto;
+    width:100%;
+  }
+  .hero-eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin:0 0 18px;
+  }
+  .hero-title{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:clamp(2.6rem, 7vw, 5.2rem);
+    line-height:0.98;
+    margin:0 0 14px;
+    color:var(--paper);
+    max-width:14ch;
+  }
+  .hero-sub{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(1.1rem, 2vw, 1.5rem);
+    color:var(--chalk);
+    opacity:0.92;
+    margin:0 0 22px;
+  }
+  .hero-note{
+    max-width:46ch;
+    font-size:1rem;
+    color:var(--chalk);
+    opacity:0.82;
+    margin:0 0 38px;
+  }
+  .scroll-cue{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--chalk);
+    opacity:0.75;
+    text-decoration:none;
+  }
+  .scroll-cue svg{ animation:bob 2.2s ease-in-out infinite; }
+  @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(5px);} }
 
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
+  /* ---------- SECTION GENERIC ---------- */
+  .section{ padding:120px 0; }
+  .section-tag{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin:0 0 16px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .section-tag::after{
+    content:'';
+    flex:1;
+    height:1px;
+    background:var(--line-on-dark);
+  }
+  .section-heading{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-style:italic;
+    font-size:clamp(1.7rem, 3.4vw, 2.6rem);
+    margin:0 0 56px;
+    max-width:22ch;
+    color:var(--paper);
+  }
 
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
+  .reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.is-visible{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .hero-bg{ animation:none; opacity:1; transform:scale(1.02); }
+    .scroll-cue svg{ animation:none; }
+    html{ scroll-behavior:auto; }
+  }
 
-.active, .dot:hover {
-  background-color: #717171;
-}
+  /* ---------- GALLERY ---------- */
+  .gallery{ background:var(--tar); }
+  .viewer{
+    position:relative;
+    background:var(--tar-soft);
+    border:1px solid var(--line-on-dark);
+    border-radius:2px;
+    overflow:hidden;
+  }
+  .viewer-frame{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/10;
+    background:#0e0f10;
+  }
+  .viewer-frame img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    opacity:0;
+    transition:opacity .5s ease;
+  }
+  .viewer-frame img.is-active{ opacity:1; }
 
-/* Fading animation */
-.fade {
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
+  .viewer-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding:16px 20px;
+    border-top:1px solid var(--line-on-dark);
+    flex-wrap:wrap;
+  }
+  .viewer-caption{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:1.05rem;
+    color:var(--chalk);
+  }
+  .viewer-controls{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:var(--brass);
+    letter-spacing:0.04em;
+  }
+  .viewer-btn{
+    width:38px; height:38px;
+    border-radius:50%;
+    border:1px solid var(--line-on-dark);
+    background:transparent;
+    color:var(--chalk);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition:border-color .2s ease, color .2s ease, transform .15s ease;
+  }
+  .viewer-btn:hover{ border-color:var(--rust); color:var(--rust); }
+  .viewer-btn:active{ transform:scale(0.92); }
 
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
+  .thumbs{
+    display:flex;
+    gap:10px;
+    margin-top:18px;
+    overflow-x:auto;
+    padding-bottom:6px;
+    scrollbar-width:thin;
+  }
+  .thumbs::-webkit-scrollbar{ height:5px; }
+  .thumbs::-webkit-scrollbar-thumb{ background:var(--line-on-dark); border-radius:4px; }
+  .thumb{
+    flex:0 0 auto;
+    width:84px; height:58px;
+    border-radius:2px;
+    overflow:hidden;
+    border:1px solid transparent;
+    cursor:pointer;
+    opacity:0.55;
+    transition:opacity .2s ease, border-color .2s ease;
+    padding:0; background:none;
+  }
+  .thumb img{ width:100%; height:100%; object-fit:cover; }
+  .thumb:hover{ opacity:0.85; }
+  .thumb.is-active{ opacity:1; border-color:var(--rust); }
 
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .prev, .next,.text {font-size: 18px}
-}
+  /* ---------- DIVIDER ---------- */
+  .divider{
+    display:flex;
+    justify-content:center;
+    padding:10px 0 0;
+    background:var(--tar);
+  }
+  .divider svg{ width:140px; height:34px; opacity:0.5; }
+
+  /* ---------- ABOUT ---------- */
+  .about{
+    background:var(--chalk);
+    color:var(--ink);
+  }
+  .about .section-tag{ color:#8a6f3f; }
+  .about .section-tag::after{ background:var(--line-on-light); }
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:64px;
+    align-items:start;
+  }
+  .about-heading{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:clamp(1.9rem, 3.6vw, 2.7rem);
+    margin:0 0 22px;
+    max-width:16ch;
+  }
+  .about-body{
+    font-size:1.05rem;
+    max-width:46ch;
+    opacity:0.86;
+    margin:0 0 14px;
+  }
+  .manifest{
+    border:1px solid var(--line-on-light);
+    border-radius:2px;
+    padding:26px 28px;
+    background:var(--paper);
+  }
+  .manifest-row{
+    display:flex;
+    justify-content:space-between;
+    gap:18px;
+    padding:13px 0;
+    border-bottom:1px solid var(--line-on-light);
+    font-family:var(--font-mono);
+    font-size:0.82rem;
+  }
+  .manifest-row:last-child{ border-bottom:none; }
+  .manifest-label{ color:#73685a; letter-spacing:0.04em; text-transform:uppercase; font-size:0.72rem; }
+  .manifest-value{ text-align:right; color:var(--ink); }
+
+  @media (max-width:760px){
+    .about-grid{ grid-template-columns:1fr; gap:40px; }
+    .section{ padding:80px 0; }
+    .hero-content{ padding-bottom:64px; }
+  }
+
+  /* ---------- STAY / AIRBNB EMBED ---------- */
+  .stay{ background:var(--tar); }
+  .stay-intro{
+    max-width:48ch;
+    font-size:1.05rem;
+    color:var(--chalk);
+    opacity:0.82;
+    margin:0 0 44px;
+  }
+  .airbnb-embed{
+    max-width:540px;
+    margin:0 auto;
+    background:var(--tar-soft);
+    border:1px solid var(--line-on-dark);
+    border-radius:2px;
+    padding:22px;
+    overflow-x:auto;
+  }
+  .airbnb-embed iframe{
+    width:100% !important;
+    max-width:480px;
+    border:0;
+    display:block;
+    margin:0 auto;
+  }
+  .airbnb-embed-placeholder{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    padding:56px 24px;
+    text-align:center;
+    border:1px dashed var(--line-on-dark);
+    border-radius:2px;
+  }
+  .airbnb-embed-placeholder svg{ opacity:0.7; }
+  .airbnb-embed-placeholder p{
+    margin:0;
+    color:var(--chalk);
+  }
+  .airbnb-embed-placeholder .ph-title{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:1.05rem;
+    opacity:0.9;
+  }
+  .airbnb-embed-placeholder .ph-hint{
+    font-family:var(--font-mono);
+    font-size:0.74rem;
+    letter-spacing:0.02em;
+    opacity:0.55;
+    max-width:34ch;
+  }
+
+  /* ---------- FOOTER ---------- */
+  .site-footer{
+    background:var(--tar);
+    border-top:1px solid var(--line-on-dark);
+    padding:36px 0 110px;
+  }
+  .site-footer .wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:14px;
+    font-family:var(--font-mono);
+    font-size:0.74rem;
+    color:var(--brass);
+    letter-spacing:0.04em;
+  }
+  .site-footer a{ text-decoration:none; color:var(--chalk); opacity:0.8; }
+  .site-footer a:hover{ opacity:1; color:var(--seaglass); }
+
+  /* ---------- COOKIE BANNER ---------- */
+  .cookie-banner{
+    position:fixed;
+    left:24px; right:24px; bottom:24px;
+    max-width:560px;
+    z-index:100;
+    background:var(--paper);
+    color:var(--ink);
+    border:1px solid rgba(28,26,23,0.12);
+    border-radius:4px;
+    box-shadow:0 18px 40px rgba(0,0,0,0.35);
+    padding:22px 24px;
+    transform:translateY(140%);
+    opacity:0;
+    transition:transform .5s cubic-bezier(.22,.9,.34,1), opacity .5s ease;
+  }
+  .cookie-banner.is-visible{ transform:translateY(0); opacity:1; }
+  .cookie-banner h2{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-weight:600;
+    font-size:1.05rem;
+    margin:0 0 8px;
+  }
+  .cookie-banner p{
+    font-size:0.88rem;
+    line-height:1.5;
+    opacity:0.82;
+    margin:0 0 18px;
+  }
+  .cookie-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--font-body);
+    font-size:0.82rem;
+    font-weight:500;
+    letter-spacing:0.02em;
+    padding:10px 18px;
+    border-radius:2px;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .btn-primary{ background:var(--rust); color:var(--paper); }
+  .btn-primary:hover{ background:#9c4a26; }
+  .btn-ghost{ background:transparent; color:var(--ink); border-color:rgba(28,26,23,0.25); }
+  .btn-ghost:hover{ border-color:var(--ink); }
+
+  @media (max-width:540px){
+    .cookie-banner{ left:14px; right:14px; bottom:14px; padding:20px; }
+  }
 </style>
 </head>
 <body>
-<h1>The 44 HAVELOCK ROAD initiative</h1>
-<p></p>
-<i>Details to be added soon. In the meantime, enjoy the slide show</i>
-<p/>
-<div class="slideshow-container">
 
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="nav-mark"><img src="img/44h-mark.svg" width="160" height="160" alt="The 44H initiative"> <span>HASTINGS</span></a>
+    <ul class="nav-links">
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#stay">Stay</a></li>
+    </ul>
+  </div>
+</header>
 
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-scrim"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Hastings, East Sussex · 50.8543° N, 0.5734° E</p>
+    <h1 class="hero-title">The 44H initiative</h1>
+    <p class="hero-sub"></p>
+    <p class="hero-note"></p>
+    <a href="#gallery" class="scroll-cue">
+      Scroll
+      <svg width="14" height="20" viewBox="0 0 14 20" fill="none"><path d="M7 1v16M1 11l6 6 6-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
 
-<div class="mySlides fade">
-  <div class="numbertext"></div>
-  <img src="img/anchor.jpg" style="width:100%">
-  <div class="text">An anchored stance</div>
-</div>
-<div class="mySlides fade">
-  <div class="numbertext"></div>
-  <img src="img/1.jpg" style="width:100%">
-  <div class="text"></div>
-</div>
+<section class="gallery section" id="gallery">
+  <div class="wrap">
+    <p class="section-tag reveal">Plates 01 — 12</p>
+    <h2 class="section-heading reveal">The Castle, the Hill, and the Sea</h2>
 
-<div class="mySlides fade">
-  <div class="numbertext"></div>
-  <img src="img/2.jpg" style="width:100%">
-  <div class="text">The Castle, the Hill, and the Sea</div>
-</div>
+    <div class="viewer reveal">
+      <div class="viewer-frame" id="viewerFrame"></div>
+      <div class="viewer-bar">
+        <span class="viewer-caption" id="viewerCaption"></span>
+        <div class="viewer-controls">
+          <button class="viewer-btn" id="prevBtn" aria-label="Previous image">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 2L4 8l6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span id="counter">01 / 12</span>
+          <button class="viewer-btn" id="nextBtn" aria-label="Next image">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 2l6 6-6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
 
-<div class="mySlides fade">
-  <div class="numbertext"></div>
-  <img src="img/3.jpg" style="width:100%">
-  <div class="text"></div>
-</div>
-<div class="mySlides fade">
-  <div class="numbertext"></div>
-  <img src="img/4.jpg" style="width:95%">
-  <div class="text"></div>
-</div>
-<div class="mySlides fade">
-  <div class="numbertext"></div>
-  <img src="img/5.jpg" style="width:100%">
-  <div class="text"></div>
-</div>
-<div class="mySlides fade">
-  <div class="numbertext"></div>
-  <img src="img/6.jpg" style="width:100%">
-  <div class="text"></div>
-</div>
-<div class="mySlides fade">
-  <div class="numbertext"></div>
-  <img src="img/7.jpg" style="width:100%">
-  <div class="text"></div>
-</div>
-<div class="mySlides fade">
-  <div class="numbertext"></div>
-  <img src="img/8.jpg" style="width:100%">
-  <div class="text"></div>
-</div>
-<div class="mySlides fade">
-  <div class="numbertext"></div>
-  <img src="img/9.jpg" style="width:100%">
-  <div class="text"></div>
-</div>
-<div class="mySlides fade">
-  <div class="numbertext"></div>
-  <img src="img/10.jpg" style="width:100%">
-  <div class="text"></div>
-</div>
-<div class="mySlides fade">
-  <div class="numbertext"></div>
-  <img src="img/11.jpg" style="width:100%">
-  <div class="text"></div>
-</div>
-<div class="mySlides fade">
-  <div class="numbertext"></div>
-  <img src="img/12.jpg" style="width:100%">
-  <div class="text"></div>
+    <div class="thumbs reveal" id="thumbs"></div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 140 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M70 2v22M62 9c0-5 16-5 16 0M58 24a12 12 0 0024 0M58 24h-8M82 24h8" stroke="#A98B53" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+  </svg>
 </div>
 
+<section class="about section" id="about">
+  <div class="wrap">
+    <p class="section-tag reveal">About this place</p>
+    <div class="about-grid">
+     <div class="reveal">
+        <h2 class="about-heading">An anchored stance</h2>
+        <p class="about-body">The 44H.uk initiative is a small hobby project to showcase Hastings and its surroundings from a unique perspective — a small "placeholder" in a grand vision of things to come.
+<br>For the first time in its 1000 year history, the Bayeux Tapestry will be on display at the British Museum in London. It is likely to draw a number of history aficionados to Hastings, St Leonards, Battle, and the 1066 Country.
+       <br>After a visit to the British Museum, Hastings is less than two hours by train from Charing Cross, and a great destination to explore the history around the tapestry<p>
+ 
+       
+        <br>For now, the story is told through the slide show above: <a href="https://hastingshistory.net/hastings-net-shops" target="new">the historic net shops</a>, the castle ruins on the West Hill, and other sights.</p>
+      </div>
+      <div class="manifest reveal">
+        <div class="manifest-row"><span class="manifest-label">Status</span><span class="manifest-value">In progress</span></div>
+        <div class="manifest-row"><span class="manifest-label">Category</span><span class="manifest-value">Hobby project</span></div>
+        <div class="manifest-row"><span class="manifest-label">Location</span><span class="manifest-value">Hastings, UK</span></div>
+        <div class="manifest-row"><span class="manifest-label">Plates</span><span class="manifest-value">12, and counting</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<a class="prev" onclick="plusSlides(-1)">❮</a>
-<a class="next" onclick="plusSlides(1)">❯</a>
+<section class="stay section" id="stay">
+  <div class="wrap">
+    <p class="section-tag reveal">Stay here</p>
+    <h2 class="section-heading reveal">Promoted Listings</h2>
+    <p class="stay-intro reveal">Availability, photos, and pricing are managed entirely on the booking sites.</p>
 
+    <div class="airbnb-embed reveal" id="airbnbEmbed">
+      <!--
+        HOST NOTE — adding your Airbnb listing:
+        1. On airbnb.com, go to your listing → Manage listing.
+        2. Open the listing page and click "Embed" (it sits below the Save/Wishlist button).
+        3. Click "Copy embed code" in the preview window.
+        4. Paste the copied <iframe> (and any accompanying <script>) INSIDE the
+           <template> tag below, replacing the comment in it. Leave the <template>
+           tag itself, the wrapper div, and everything else as-is.
+
+        Why a <template>? Airbnb's embed is third-party content from airbnb.com, and it
+        may set its own cookies once it loads. Keeping it inside a <template> means the
+        script below only loads it into the page after a visitor accepts cookies —
+        so nothing from Airbnb runs without consent. If you'd rather skip this and load
+        the listing unconditionally for everyone, you can paste the embed code directly
+        into the div with id "airbnbEmbedSlot" instead and delete the template.
+      -->
+      <template id="airbnbEmbedTemplate">
+        <div class="airbnb-embed-frame" data-id="1670203654719248835" data-view="home" data-hide-price="true" style="width: 450px; height: 300px; margin: auto;"><a href="https://www.airbnb.co.uk/rooms/1670203654719248835?guests=1&amp;adults=1&amp;s=66&amp;source=embed_widget">View on Airbnb</a><a href="https://www.airbnb.co.uk/rooms/1670203654719248835?guests=1&amp;adults=1&amp;s=66&amp;source=embed_widget" rel="nofollow">Rental unit in East Sussex · ★New · Studio · 1 bed · 1 private bathroom</a><script async="" src="https://www.airbnb.co.uk/embeddable/airbnb_jssdk"></script></div>
+      </template>
+
+      <!--div id="airbnbEmbedSlot">
+        <div class="airbnb-embed-placeholder" id="airbnbPlaceholder">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="6" y="16" width="28" height="18" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+            <path d="M6 18L20 6l14 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17 34V24h6v10" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          </svg>
+          <p class="ph-title" id="airbnbPhTitle">Airbnb listing preview</p>
+          <p class="ph-hint" id="airbnbPhHint">This space is ready for the listing's embed code from Airbnb.</p>
+          <button class="btn btn-ghost" id="loadAirbnbBtn" type="button" hidden>Load listing anyway</button>
+        </div>
+      </div -->
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© <span id="year"></span> Hastings.44.uk</span>
+    <span>
+      <a href="https://44h.uk" target="_blank" rel="noopener">44h.uk</a>
+      <a href="#" id="cookieSettingsLink" style="margin-left:18px;">Cookie settings</a>
+    </span>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie notice">
+  <h2>About the cookies here</h2>
+  <p>This page itself only stores your choice below, in your browser. Further down the page, some select listings from third-party booking sites like Airbnb and Booking.com are hosted by those sites, and may set their own cookies once that section loads — accepting lets it load; declining keeps it blocked until you choose to load it.</p>
+  <div class="cookie-actions">
+    <button class="btn btn-primary" id="acceptCookies">Accept</button>
+    <button class="btn btn-ghost" id="declineCookies">Decline</button>
+  </div>
 </div>
-<br>
-
-<div style="text-align:center">
-  <span class="dot" onclick="currentSlide(1)"></span> 
-  <span class="dot" onclick="currentSlide(2)"></span> 
-  <span class="dot" onclick="currentSlide(3)"></span> 
-  <span class="dot" onclick="currentSlide(4)"></span> 
-  <span class="dot" onclick="currentSlide(5)"></span> 
-  <span class="dot" onclick="currentSlide(6)"></span> 
-  <span class="dot" onclick="currentSlide(7)"></span> 
-  <span class="dot" onclick="currentSlide(8)"></span> 
-  <span class="dot" onclick="currentSlide(9)"></span> 
-  <span class="dot" onclick="currentSlide(10)"></span>
-  <span class="dot" onclick="currentSlide(11)"></span> 
-  <span class="dot" onclick="currentSlide(12)"></span> 
-  <span class="dot" onclick="currentSlide(13)"></span> 
-</div>
-
 
 <script>
+(function(){
+  "use strict";
 
+  /* ---------- Year ---------- */
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-let slideIndex = 0;
-let block = 0;
-showSlidesN(slideIndex);
-
-function plusSlides(n) {
-  block = 1;
-  showSlidesN(slideIndex += n);
-}
-
-function currentSlide(n) {
-  block = 1;
-  showSlidesN(slideIndex = n);
-}
-
-function showSlidesN(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
+  /* ---------- Nav scroll state ---------- */
+  var nav = document.getElementById('nav');
+  function onScroll(){
+    nav.classList.toggle('is-scrolled', window.scrollY > 40);
   }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  /* ---------- Reveal on scroll ---------- */
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var revealEls = document.querySelectorAll('.reveal');
+  if(!reduceMotion && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.15 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
   }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-  setTimeout(showSlides, 2000); // Change image every 2 seconds
 
-}
-
-
-
-function showSlides() {
-  if(block > 0) { return ; }
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
+  /* ---------- Gallery ---------- */
+  var BASE = 'https://44h.uk/img/';
+  /* Captions below are taken from the <div class="text"> elements that sit right
+     after each <img> tag on 44h.uk. Most of these are empty in the source — only
+     the div after 2.jpg currently has text. */
+  var captions = [
+    '',
+    'The Castle, the Hill, and the Sea',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    ''
+  ];
+  var slides = [];
+  for (var i = 1; i <= 12; i++){
+    slides.push({ src: BASE + i + '.jpg', label: captions[i - 1] || '' });
   }
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}    
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
+
+  var frame = document.getElementById('viewerFrame');
+  var thumbs = document.getElementById('thumbs');
+  var caption = document.getElementById('viewerCaption');
+  var counter = document.getElementById('counter');
+  var current = 0;
+
+  slides.forEach(function(slide, idx){
+    var fallback = 'Hastings — image ' + String(idx + 1).padStart(2,'0');
+    var img = document.createElement('img');
+    img.src = slide.src;
+    img.alt = slide.label ? (slide.label + ' — Hastings') : fallback;
+    img.loading = idx === 0 ? 'eager' : 'lazy';
+    if(idx === 0) img.classList.add('is-active');
+    frame.appendChild(img);
+
+    var thumbBtn = document.createElement('button');
+    thumbBtn.className = 'thumb' + (idx === 0 ? ' is-active' : '');
+    thumbBtn.setAttribute('aria-label', 'Go to ' + (slide.label || fallback));
+    var thumbImg = document.createElement('img');
+    thumbImg.src = slide.src;
+    thumbImg.alt = '';
+    thumbImg.loading = 'lazy';
+    thumbBtn.appendChild(thumbImg);
+    thumbBtn.addEventListener('click', function(){ goTo(idx); });
+    thumbs.appendChild(thumbBtn);
+  });
+
+  var frameImgs = frame.querySelectorAll('img');
+  var thumbBtns = thumbs.querySelectorAll('.thumb');
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function goTo(idx){
+    current = (idx + slides.length) % slides.length;
+    frameImgs.forEach(function(im, i){ im.classList.toggle('is-active', i === current); });
+    thumbBtns.forEach(function(tb, i){ tb.classList.toggle('is-active', i === current); });
+    caption.textContent = slides[current].label;
+    counter.textContent = pad(current + 1) + ' / ' + pad(slides.length);
+    var activeThumb = thumbBtns[current];
+    if(activeThumb && activeThumb.scrollIntoView){
+      activeThumb.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', inline:'center', block:'nearest' });
+    }
+    startAutoplay();
   }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-  setTimeout(showSlides, 2000); // Change image every 2 seconds
-  
-}
+
+  document.getElementById('prevBtn').addEventListener('click', function(){ goTo(current - 1); });
+  document.getElementById('nextBtn').addEventListener('click', function(){ goTo(current + 1); });
+
+  document.addEventListener('keydown', function(e){
+    var galleryRect = document.getElementById('gallery').getBoundingClientRect();
+    var inView = galleryRect.top < window.innerHeight && galleryRect.bottom > 0;
+    if(!inView) return;
+    if(e.key === 'ArrowLeft') goTo(current - 1);
+    if(e.key === 'ArrowRight') goTo(current + 1);
+  });
+
+  /* swipe support */
+  var touchStartX = null;
+  frame.addEventListener('touchstart', function(e){ touchStartX = e.touches[0].clientX; }, { passive:true });
+  frame.addEventListener('touchend', function(e){
+    if(touchStartX === null) return;
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    if(Math.abs(dx) > 40){ dx < 0 ? goTo(current + 1) : goTo(current - 1); }
+    touchStartX = null;
+  }, { passive:true });
+
+  /* ---------- Autoplay (8s per slide) ---------- */
+  var AUTOPLAY_DELAY = 8000;
+  var autoplayTimer = null;
+
+  function stopAutoplay(){
+    if(autoplayTimer){ clearInterval(autoplayTimer); autoplayTimer = null; }
+  }
+  function startAutoplay(){
+    stopAutoplay();
+    if(reduceMotion) return; /* respect reduced-motion preference: no auto-advance */
+    autoplayTimer = setInterval(function(){ goTo(current + 1); }, AUTOPLAY_DELAY);
+  }
+
+  var viewerEl = document.querySelector('.viewer');
+  viewerEl.addEventListener('mouseenter', stopAutoplay);
+  viewerEl.addEventListener('mouseleave', startAutoplay);
+  viewerEl.addEventListener('focusin', stopAutoplay);
+  viewerEl.addEventListener('focusout', startAutoplay);
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden){ stopAutoplay(); } else { startAutoplay(); }
+  });
+
+  goTo(0);
+
+  /* ---------- Cookie consent ---------- */
+  var COOKIE_KEY = 'cookieConsent';
+  var banner = document.getElementById('cookieBanner');
+
+  function getConsent(){
+    try { return localStorage.getItem(COOKIE_KEY); } catch(e){ return null; }
+  }
+  function setConsent(value){
+    try { localStorage.setItem(COOKIE_KEY, value); } catch(e){ /* ignore */ }
+  }
+
+  if(!getConsent()){
+    setTimeout(function(){ banner.classList.add('is-visible'); }, 700);
+  }
+
+  /* ---------- Airbnb embed gating ----------
+     The Airbnb listing is third-party content and may set its own cookies once it
+     loads, so it's kept in a <template> and only mounted into the page after consent. */
+  var embedTemplate = document.getElementById('airbnbEmbedTemplate');
+  var embedSlot = document.getElementById('airbnbEmbedSlot');
+  var placeholder = document.getElementById('airbnbPlaceholder');
+  var phTitle = document.getElementById('airbnbPhTitle');
+  var phHint = document.getElementById('airbnbPhHint');
+  var loadAnywayBtn = document.getElementById('loadAirbnbBtn');
+
+  function hasRealEmbed(){
+    return !!(embedTemplate && embedTemplate.content && embedTemplate.content.querySelector('iframe'));
+  }
+  function showAirbnbEmbed(){
+    if(!hasRealEmbed()) return;
+    embedSlot.innerHTML = '';
+    embedSlot.appendChild(embedTemplate.content.cloneNode(true));
+  }
+  function showAirbnbPlaceholder(blocked){
+    if(blocked){
+      phTitle.textContent = 'Listing blocked pending cookie consent';
+      phHint.textContent = "This listing is hosted by Airbnb and may set its own cookies once it loads.";
+      loadAnywayBtn.hidden = false;
+    } else {
+      phTitle.textContent = 'Airbnb listing preview';
+      phHint.textContent = "This space is ready for the listing's embed code from Airbnb.";
+      loadAnywayBtn.hidden = true;
+    }
+    if(placeholder.parentNode !== embedSlot){
+      embedSlot.innerHTML = '';
+      embedSlot.appendChild(placeholder);
+    }
+  }
+  function refreshAirbnbEmbed(){
+    if(!hasRealEmbed()) return; /* no listing pasted in yet — leave the default placeholder alone */
+    if(getConsent() === 'accepted'){ showAirbnbEmbed(); }
+    else { showAirbnbPlaceholder(true); }
+  }
+
+  loadAnywayBtn.addEventListener('click', function(){
+    setConsent('accepted');
+    banner.classList.remove('is-visible');
+    showAirbnbEmbed();
+  });
+
+  refreshAirbnbEmbed();
+
+  document.getElementById('acceptCookies').addEventListener('click', function(){
+    setConsent('accepted');
+    banner.classList.remove('is-visible');
+    refreshAirbnbEmbed();
+  });
+  document.getElementById('declineCookies').addEventListener('click', function(){
+    setConsent('declined');
+    banner.classList.remove('is-visible');
+    refreshAirbnbEmbed();
+  });
+  document.getElementById('cookieSettingsLink').addEventListener('click', function(e){
+    e.preventDefault();
+    banner.classList.add('is-visible');
+  });
+
+})();
 </script>
+
 </body>
-
-<footer>
-<hr />
-<p>
-<b>The 44H (44 HAVELOCK ROAD) initiative</b>
-<br/>This is small hobby project to showcase Hastings and its surroundings from a unique perspective,
-<br/>a small 'placeholder' in a grand vision of things to come<br/>
-
-
-</p>
-</footer>
 </html>
