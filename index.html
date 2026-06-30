@@ -732,7 +732,7 @@
     thumbImg.alt = '';
     thumbImg.loading = 'lazy';
     thumbBtn.appendChild(thumbImg);
-    thumbBtn.addEventListener('click', function(){ goTo(idx); });
+    thumbBtn.addEventListener('click', function(){ goTo(idx, true); });
     thumbs.appendChild(thumbBtn);
   });
 
@@ -741,28 +741,30 @@
 
   function pad(n){ return String(n).padStart(2,'0'); }
 
-  function goTo(idx){
+  function goTo(idx, userInitiated){
     current = (idx + slides.length) % slides.length;
     frameImgs.forEach(function(im, i){ im.classList.toggle('is-active', i === current); });
     thumbBtns.forEach(function(tb, i){ tb.classList.toggle('is-active', i === current); });
     caption.textContent = slides[current].label;
     counter.textContent = pad(current + 1) + ' / ' + pad(slides.length);
-    var activeThumb = thumbBtns[current];
-    if(activeThumb && activeThumb.scrollIntoView){
-      activeThumb.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', inline:'center', block:'nearest' });
+    if(userInitiated){
+      var activeThumb = thumbBtns[current];
+      if(activeThumb && activeThumb.scrollIntoView){
+        activeThumb.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', inline:'center', block:'nearest' });
+      }
     }
     startAutoplay();
   }
 
-  document.getElementById('prevBtn').addEventListener('click', function(){ goTo(current - 1); });
-  document.getElementById('nextBtn').addEventListener('click', function(){ goTo(current + 1); });
+  document.getElementById('prevBtn').addEventListener('click', function(){ goTo(current - 1, true); });
+  document.getElementById('nextBtn').addEventListener('click', function(){ goTo(current + 1, true); });
 
   document.addEventListener('keydown', function(e){
     var galleryRect = document.getElementById('gallery').getBoundingClientRect();
     var inView = galleryRect.top < window.innerHeight && galleryRect.bottom > 0;
     if(!inView) return;
-    if(e.key === 'ArrowLeft') goTo(current - 1);
-    if(e.key === 'ArrowRight') goTo(current + 1);
+    if(e.key === 'ArrowLeft') goTo(current - 1, true);
+    if(e.key === 'ArrowRight') goTo(current + 1, true);
   });
 
   /* swipe support */
@@ -771,11 +773,11 @@
   frame.addEventListener('touchend', function(e){
     if(touchStartX === null) return;
     var dx = e.changedTouches[0].clientX - touchStartX;
-    if(Math.abs(dx) > 40){ dx < 0 ? goTo(current + 1) : goTo(current - 1); }
+    if(Math.abs(dx) > 40){ dx < 0 ? goTo(current + 1, true) : goTo(current - 1, true); }
     touchStartX = null;
   }, { passive:true });
 
-  /* ---------- Autoplay (8s per slide) ---------- */
+  /* ---------- Autoplay (2s per slide) ---------- */
   var AUTOPLAY_DELAY = 2000;
   var autoplayTimer = null;
 
@@ -784,7 +786,7 @@
   }
   function startAutoplay(){
     stopAutoplay();
-    if(reduceMotion) return; /* respect reduced-motion preference: no auto-advance */
+    if(reduceMotion) return;
     autoplayTimer = setInterval(function(){ goTo(current + 1); }, AUTOPLAY_DELAY);
   }
 
@@ -848,7 +850,7 @@
     }
   }
   function refreshAirbnbEmbed(){
-    if(!hasRealEmbed()) return; /* no listing pasted in yet — leave the default placeholder alone */
+    if(!hasRealEmbed()) return;
     if(getConsent() === 'accepted'){ showAirbnbEmbed(); }
     else { showAirbnbPlaceholder(true); }
   }
